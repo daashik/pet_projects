@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{service.title}} — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="service-details">
+        <div class="section-header">{{service.title}}</div>
+
+        <div class="content-block">
+          {{#if service.description}}
+            <p>{{service.description}}</p>
+          {{else}}
+            <p>Описание отсутствует.</p>
+          {{/if}}
+
+          {{#if service.priceRub}}
+            <p><strong>Базовая цена:</strong> {{service.priceRub}} ₽</p>
+          {{else}}
+            <p><strong>Базовая цена:</strong> уточняется</p>
+          {{/if}}
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

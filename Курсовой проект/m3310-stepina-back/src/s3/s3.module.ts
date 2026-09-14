@@ -1,0 +1,14 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { S3Service } from './s3.service';
+import { S3Controller } from './s3.controller';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Module({
+  imports: [ConfigModule],
+  providers: [S3Service, PrismaService],
+  exports: [S3Service],
+  controllers: [S3Controller]
+})
+export class S3Module {}

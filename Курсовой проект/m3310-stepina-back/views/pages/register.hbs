@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Регистрация — Dust & Glory</title>
+    {{> head}}
+  </head>
+  <body>
+    {{> header}}
+
+    <main>
+      <div class="auth-container">
+        <h2 class="section-header">Регистрация</h2>
+
+        <div id="auth-error" class="auth-error" style="display:none"></div>
+        <div id="auth-success" class="auth-success" style="display:none"></div>
+
+        <form id="register-form" class="auth-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" required placeholder="Минимум 8 символов" />
+          </div>
+          <button type="submit" class="session-btn primary">Зарегистрироваться</button>
+        </form>
+
+        <p class="auth-switch">
+          Уже есть аккаунт? <a href="/login">Войти</a>
+        </p>
+      </div>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('auth-error');
+            const successDiv = document.getElementById('auth-success');
+
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            try {
+            const response = await fetch('/auth/signup', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'st-auth-mode': 'cookie'
+                },
+                credentials: 'include',
+                body: JSON.stringify({ formFields: [
+                { id: 'email', value: email },
+                { id: 'password', value: password }
+                ]})
+            });
+
+            const data = await response.json();
+
+            if (data.status === 'OK') {
+                successDiv.textContent = 'Аккаунт создан! Перенаправляем...';
+                successDiv.style.display = 'block';
+                setTimeout(() => window.location.href = '/', 1500);
+            } else if (data.status === 'EMAIL_ALREADY_EXISTS_ERROR') {
+                errorDiv.textContent = 'Пользователь с таким email уже существует';
+                errorDiv.style.display = 'block';
+            } else if (data.status === 'FIELD_ERROR') {
+                const msg = data.formFields?.map(f => f.error).join(', ') ?? 'Ошибка валидации';
+                errorDiv.textContent = msg;
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.textContent = 'Ошибка регистрации. Попробуйте снова.';
+                errorDiv.style.display = 'block';
+            }
+            } catch (err) {
+            errorDiv.textContent = 'Ошибка сети. Попробуйте позже.';
+            errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Редактировать запись — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="schedule-edit">
+        <div class="section-header">Редактировать запись</div>
+
+        <form action="/schedule/{{slot.id}}/edit" method="post" class="content-block">
+          <label>
+            Название занятия:
+            <input
+              type="text"
+              name="title"
+              required
+              value="{{slot.title}}"
+            />
+          </label>
+
+          <label>
+            Начало:
+            <input
+              type="datetime-local"
+              name="startAt"
+              required
+            />
+          </label>
+
+          <label>
+            Конец:
+            <input
+              type="datetime-local"
+              name="endAt"
+              required
+            />
+          </label>
+
+          <button type="submit">Сохранить</button>
+        </form>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

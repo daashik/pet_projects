@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Добавить пользователя — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="user-add">
+        <div class="section-header">Добавить пользователя</div>
+
+        <form action="/users" method="post" class="content-block">
+          <label>
+            Имя:
+            <input
+              type="text"
+              name="name"
+              required
+              minlength="2"
+              placeholder="Например: Анна"
+            />
+          </label>
+
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="anna@example.com"
+            />
+          </label>
+
+          <button type="submit">Создать</button>
+        </form>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

@@ -1,0 +1,98 @@
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "./ERD.svg"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BookingStatus {
+  NEW
+  CONFIRMED
+  CANCELED
+  COMPLETED
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  createdAt DateTime @default(now())
+
+  bookings  Booking[]
+  reviews   Review[]
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  priceRub    Int?
+  createdAt   DateTime @default(now())
+
+  bookings    Booking[]
+}
+
+model Horse {
+  id        Int      @id @default(autoincrement())
+  name      String
+  gender    String?
+  breed     String?
+  photoUrl  String?
+  createdAt DateTime @default(now())
+
+  bookings  Booking[]
+}
+
+model ScheduleSlot {
+  id        Int      @id @default(autoincrement())
+  title     String   // например: "Пн 12:00 — Группа"
+  startAt   DateTime
+  endAt     DateTime
+  createdAt DateTime @default(now())
+
+  bookings  Booking[]
+}
+
+model Booking {
+  id        Int           @id @default(autoincrement())
+  date      DateTime
+  status    BookingStatus @default(NEW)
+  createdAt DateTime      @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  serviceId Int
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  horseId   Int?
+  horse     Horse?   @relation(fields: [horseId], references: [id], onDelete: SetNull)
+
+  slotId    Int?
+  slot      ScheduleSlot? @relation(fields: [slotId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([serviceId])
+  @@index([horseId])
+  @@index([slotId])
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  email     String
+  comment   String
+  createdAt DateTime @default(now())
+
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+}

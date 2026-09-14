@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог — Dust & Glory</title>
+    <meta name="description" content="Отзывы клиентов и достижения конного клуба Dust & Glory.">
+    <meta name="keywords" content="блог, отзывы, лошади, победы, конный клуб, Dust & Glory">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/blog.css">
+    <script src="../js/achievements.js" defer></script>
+    <script src="../js/blog.js" defer></script>
+    <script src="../js/main.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Dust & Glory</h1>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">О клубе</a></li>
+                <li><a href="index.html#services">Услуги</a></li>
+                <li><a href="index.html#prices">Цены</a></li>
+                <li><a href="horses.html">Лошади</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <figure>
+            <img src="../img/image.jpg" alt="Клуб Dust & Glory" width="800">
+            <figcaption>Ваше конное путешествие: от первых шагов в седле до уверенного ритма шага и рыси.</figcaption>
+        </figure>
+
+        <a href="index.html#contacts" class="sticky-booking-btn">Записаться на занятие</a>
+    </header>
+
+    <main>
+        <section id="blog">
+            <div class="section-header">Достижения клуба</div>
+
+            <div id="achievements-loader" class="loader hidden">
+                <div class="spinner"></div>
+                <p>Загружаем победы из облака...</p>
+            </div>
+
+            <div id="achievements-error" class="error-message hidden">
+                <p>Не удалось загрузить достижения. Проверьте подключение.</p>
+            </div>
+
+            <div id="achievements-list" class="achievements-list"></div>
+
+            <template id="achievement-card-template">
+                <div class="achievement-card">
+                    <h3 class="achievement-title"></h3>
+                    <p class="achievement-description"></p>
+                    <small class="achievement-date"></small>
+                </div>
+            </template>
+
+            <div class="section-header">Отзывы клиентов</div>
+
+            <form id="review-form">
+                <label>
+                    ФИО:
+                    <input type="text" name="fullName" required minlength="2" placeholder="Иванов Иван">
+                </label>
+                <label>
+                    Email (не публикуется):
+                    <input type="email" name="email" required placeholder="ivan@example.com">
+                </label>
+                <label>
+                    Ваша обратная связь:
+                    <textarea name="comment" required minlength="10" placeholder="Расскажите, что вам понравилось..."></textarea>
+                </label>
+                <button type="submit">Добавить</button>
+            </form>
+
+            <div id="reviews-list"></div>
+
+            <template id="review-card-template">
+                <div class="review-card">
+                    <h3 class="review-name"></h3>
+                    <p class="review-comment"></p>
+                    <div class="review-actions">
+                        <button class="btn-edit">Редактировать</button>
+                        <button class="btn-delete">Удалить</button>
+                    </div>
+                </div>
+            </template>
+
+            <template id="edit-fields-template">
+                <input type="text" class="edit-name" />
+                <textarea class="edit-comment"></textarea>
+            </template>
+        </section>
+    </main>
+
+    <footer id="contacts">
+        <h2>Контакты</h2>
+        <address>
+            Санкт-Петербург, посёлок Токсово<br>
+            Тел.: <a href="tel:+79219999999">+7 (921) 999-99-99</a><br>
+            E-mail: <a href="mailto:admin@dandg.ru">admin@dandg.ru</a>
+        </address>
+        <p>&copy; 2025 Конный клуб «Dust & Glory». Все права защищены.</p>
+        <p id="load-time"></p>
+    </footer>
+</body>
+</html>

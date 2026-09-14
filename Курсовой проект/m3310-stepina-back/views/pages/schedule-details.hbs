@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{slot.title}} — Расписание</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="schedule-details">
+        <div class="section-header">{{slot.title}}</div>
+
+        <div class="content-block">
+          <p><strong>Название:</strong> {{slot.title}}</p>
+          <p><strong>Начало:</strong> {{slot.startAt}}</p>
+          <p><strong>Конец:</strong> {{slot.endAt}}</p>
+
+          <div class="services-actions">
+            <a href="/schedule/{{slot.id}}/edit" class="session-btn primary">Редактировать</a>
+          </div>
+
+          <form action="/schedule/{{slot.id}}/delete" method="POST" class="service-delete-form">
+            <button type="submit" class="btn-delete">Удалить</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Редактировать бронирование — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="booking-edit">
+        <div class="section-header">Редактировать бронирование</div>
+
+        <form action="/bookings/{{booking.id}}/edit" method="post" class="content-block">
+          <label>
+            Дата и время:
+            <input type="datetime-local" name="date" required />
+          </label>
+
+          <label>
+            Пользователь:
+            <select name="userId" required>
+              {{#each users}}
+                <option value="{{id}}">{{name}}</option>
+              {{/each}}
+            </select>
+          </label>
+
+          <label>
+            Услуга:
+            <select name="serviceId" required>
+              {{#each services}}
+                <option value="{{id}}">{{title}}</option>
+              {{/each}}
+            </select>
+          </label>
+
+          <label>
+            Лошадь:
+            <select name="horseId">
+              <option value="">Без выбора</option>
+              {{#each horses}}
+                <option value="{{id}}">{{name}}</option>
+              {{/each}}
+            </select>
+          </label>
+
+          <label>
+            Слот расписания:
+            <select name="slotId">
+              <option value="">Без выбора</option>
+              {{#each slots}}
+                <option value="{{id}}">{{title}}</option>
+              {{/each}}
+            </select>
+          </label>
+
+          <button type="submit">Сохранить</button>
+        </form>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

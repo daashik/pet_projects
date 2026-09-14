@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Пользователи — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="users">
+        <div class="section-header">Профили пользователей</div>
+
+        <div class="services-actions">
+          <a href="/users/add" class="session-btn primary">Добавить пользователя</a>
+        </div>
+
+        <div class="services-content">
+          {{#each users}}
+            <div class="service-item">
+              <h3>
+                <a href="/users/{{id}}" class="service-link">{{name}}</a>
+              </h3>
+
+              <p><strong>Email:</strong> {{email}}</p>
+              <p><strong>Бронирований:</strong> {{#if bookings}}{{bookings.length}}{{else}}0{{/if}}</p>
+              <p><strong>Отзывов:</strong> {{#if reviews}}{{reviews.length}}{{else}}0{{/if}}</p>
+
+              <form action="/users/{{id}}/delete" method="POST" class="service-delete-form">
+                <button type="submit" class="btn-delete">Удалить</button>
+              </form>
+            </div>
+          {{/each}}
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

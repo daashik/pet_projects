@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Услуги — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="services">
+        <div class="section-header">Услуги</div>
+
+        <div class="services-actions">
+          <a href="/services/add" class="session-btn primary">Добавить услугу</a>
+        </div>
+
+        <div class="services-content">
+          {{#each services}}
+            <div class="service-item">
+              <h3 class="service-title">
+                <a href="/services/{{id}}" class="service-link">{{title}}</a>
+              </h3>
+
+              {{#if description}}
+                <p class="service-description">{{description}}</p>
+              {{/if}}
+
+              {{#if priceRub}}
+                <p class="service-price"><strong>Базовая цена:</strong> {{priceRub}} ₽</p>
+              {{else}}
+                <p class="service-price"><strong>Базовая цена:</strong> уточняется</p>
+              {{/if}}
+
+              <form action="/services/{{id}}/delete" method="POST" class="service-delete-form">
+                <button type="submit" class="btn-delete">Удалить</button>
+              </form>
+            </div>
+          {{/each}}
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

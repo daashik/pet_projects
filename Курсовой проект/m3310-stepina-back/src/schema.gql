@@ -1,0 +1,322 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Информация о лошади"""
+type Horse {
+  id: ID!
+
+  """Кличка лошади"""
+  name: String!
+
+  """Пол лошади"""
+  gender: String
+
+  """Порода или масть"""
+  breed: String
+
+  """Ссылка на фото"""
+  photoUrl: String
+
+  """Дата добавления в клуб"""
+  createdAt: DateTime!
+
+  """Бронирования с участием этой лошади"""
+  bookings: [Booking!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Отзыв клиента"""
+type Review {
+  id: ID!
+
+  """Полное имя автора отзыва"""
+  fullName: String!
+
+  """Электронная почта для связи"""
+  email: String!
+
+  """Текст отзыва"""
+  comment: String!
+  createdAt: DateTime!
+  userId: Int
+
+  """Автор отзыва (если зарегистрирован)"""
+  user: User
+}
+
+"""Пользователь системы (клиент)"""
+type User {
+  id: ID!
+
+  """Имя пользователя"""
+  name: String!
+
+  """Электронная почта"""
+  email: String!
+  createdAt: DateTime!
+
+  """Бронирования пользователя"""
+  bookings: [Booking!]
+
+  """Отзывы пользователя"""
+  reviews: [Review!]
+}
+
+"""Бронирование услуги/занятия"""
+type Booking {
+  id: ID!
+
+  """Дата бронирования"""
+  date: DateTime!
+
+  """Текущий статус"""
+  status: BookingStatus!
+  createdAt: DateTime!
+  userId: Float!
+  serviceId: Float!
+  horseId: Float
+  slotId: Float
+
+  """Клиент"""
+  user: User
+
+  """Выбранная услуга"""
+  service: Service
+
+  """Назначенная лошадь"""
+  horse: Horse
+}
+
+"""Статус бронирования (NEW, CONFIRMED, CANCELED, COMPLETED)"""
+enum BookingStatus {
+  NEW
+  CONFIRMED
+  CANCELED
+  COMPLETED
+}
+
+"""Предоставляемая услуга клуба"""
+type Service {
+  id: ID!
+
+  """Название услуги"""
+  title: String!
+
+  """Описание услуги"""
+  description: String
+
+  """Цена в рублях"""
+  priceRub: Int
+  createdAt: DateTime!
+
+  """Бронирования данной услуги"""
+  bookings: [Booking!]
+}
+
+"""Временной слот расписания"""
+type ScheduleSlot {
+  id: ID!
+
+  """Название занятия (например: Пн 12:00 - Группа)"""
+  title: String!
+
+  """Время начала"""
+  startAt: DateTime!
+
+  """Время окончания"""
+  endAt: DateTime!
+  createdAt: DateTime!
+
+  """Бронирования на этот слот"""
+  bookings: [Booking!]
+}
+
+type Query {
+  services(skip: Int = 0, take: Int = 50): [Service!]!
+  service(id: Int!): Service!
+  horses(skip: Int! = 0, take: Int! = 10): [Horse!]!
+  horse(id: Int!): Horse!
+  bookings(skip: Int = 0, take: Int = 10): [Booking!]!
+  booking(id: Int!): Booking!
+  reviews(skip: Int = 0, take: Int = 50): [Review!]!
+  review(id: Int!): Review
+  users(skip: Int = 0, take: Int = 50): [User!]!
+  user(id: Int!): User!
+  scheduleSlots(skip: Int = 0, take: Int = 50): [ScheduleSlot!]!
+  scheduleSlot(id: Int!): ScheduleSlot!
+}
+
+type Mutation {
+  createService(createServiceInput: CreateServiceInput!): Service!
+  updateService(updateServiceInput: UpdateServiceInput!): Service!
+  removeService(id: Int!): Service!
+  createHorse(createHorseInput: CreateHorseInput!): Horse!
+  updateHorse(updateHorseInput: UpdateHorseInput!): Horse!
+  removeHorse(id: Int!): Horse!
+  createBooking(createBookingInput: CreateBookingInput!): Booking!
+  updateBooking(updateBookingInput: UpdateBookingInput!): Booking!
+  removeBooking(id: Int!): Booking!
+
+  """Подтвердить бронирование"""
+  confirmBooking(id: Int!): Booking!
+
+  """Отменить бронирование"""
+  cancelBooking(id: Int!): Booking!
+
+  """Завершить бронирование"""
+  completeBooking(id: Int!): Booking!
+  createReview(createReviewInput: CreateReviewInput!): Review!
+  removeReview(id: Int!): Review!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createScheduleSlot(createScheduleInput: CreateScheduleInput!): ScheduleSlot!
+  updateScheduleSlot(updateScheduleInput: UpdateScheduleInput!): ScheduleSlot!
+  removeScheduleSlot(id: Int!): ScheduleSlot!
+}
+
+input CreateServiceInput {
+  """Название услуги"""
+  title: String!
+
+  """Описание услуги"""
+  description: String
+
+  """Цена в рублях"""
+  priceRub: Int
+}
+
+input UpdateServiceInput {
+  """Название услуги"""
+  title: String
+
+  """Описание услуги"""
+  description: String
+
+  """Цена в рублях"""
+  priceRub: Int
+  id: Int!
+}
+
+input CreateHorseInput {
+  """Кличка лошади"""
+  name: String!
+
+  """Пол лошади"""
+  gender: String
+
+  """Порода или масть"""
+  breed: String
+
+  """Ссылка на фото"""
+  photoUrl: String
+}
+
+input UpdateHorseInput {
+  """Кличка лошади"""
+  name: String
+
+  """Пол лошади"""
+  gender: String
+
+  """Порода или масть"""
+  breed: String
+
+  """Ссылка на фото"""
+  photoUrl: String
+  id: Int!
+}
+
+input CreateBookingInput {
+  """Дата в формате ISO 8601"""
+  date: String!
+
+  """ID клиента"""
+  userId: Int!
+
+  """ID выбранной услуги"""
+  serviceId: Int!
+
+  """ID конкретной лошади"""
+  horseId: Int
+
+  """ID временного слота"""
+  slotId: Int
+}
+
+input UpdateBookingInput {
+  """Дата в формате ISO 8601"""
+  date: String
+
+  """ID клиента"""
+  userId: Int
+
+  """ID выбранной услуги"""
+  serviceId: Int
+
+  """ID конкретной лошади"""
+  horseId: Int
+
+  """ID временного слота"""
+  slotId: Int
+  id: Int!
+}
+
+input CreateReviewInput {
+  """Полное имя автора отзыва"""
+  fullName: String!
+
+  """Электронная почта для связи"""
+  email: String!
+
+  """Текст отзыва"""
+  comment: String!
+
+  """ID пользователя (если авторизован)"""
+  userId: Int
+}
+
+input CreateUserInput {
+  """Имя пользователя"""
+  name: String!
+
+  """Электронная почта"""
+  email: String!
+}
+
+input UpdateUserInput {
+  """Имя пользователя"""
+  name: String
+
+  """Электронная почта"""
+  email: String
+  id: Int!
+}
+
+input CreateScheduleInput {
+  """Название занятия"""
+  title: String!
+
+  """Время начала (ISO8601)"""
+  startAt: String!
+
+  """Время окончания (ISO8601)"""
+  endAt: String!
+}
+
+input UpdateScheduleInput {
+  """Название занятия"""
+  title: String
+
+  """Время начала (ISO8601)"""
+  startAt: String
+
+  """Время окончания (ISO8601)"""
+  endAt: String
+  id: Int!
+}

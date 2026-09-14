@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Лошади — Dust & Glory</title>
+    {{> head}}
+    <link rel="stylesheet" href="/styles/gallery.css" />
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="horses">
+        <div class="section-header">Лошади</div>
+
+        <div class="services-actions">
+          <a href="/horses/add" class="session-btn primary">Добавить лошадь</a>
+        </div>
+
+        <div class="horses-grid">
+          {{#each realHorses}}
+            <div class="horse-card">
+              <figure>
+                <a href="/horses/{{id}}">
+                  <img src="{{photoUrl}}" alt="{{name}} — {{breed}}, {{gender}}" />
+                </a>
+              </figure>
+
+              <div class="horse-info">
+                <strong>Кличка:</strong> {{name}}<br />
+                <strong>Пол:</strong> {{gender}}<br />
+                <strong>Порода:</strong> {{breed}}
+              </div>
+
+              <form action="/horses/{{id}}/delete" method="POST" class="horse-delete-form">
+                <button type="submit" class="btn-delete">Удалить</button>
+              </form>
+            </div>
+          {{/each}}
+        </div>
+      </section>
+
+      </section>
+      <hr> <section id="horses-gallery">
+        <div class="section-header">Галерея фотографий</div>
+        
+        <div class="gallery-wrapper">
+          {{#each allPhotos}}
+            {{#if photoUrl}}
+              <div class="gallery-card">
+                <img src="{{photoUrl}}" alt="Horse"/>
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{user.name}} — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="user-details">
+        <div class="section-header">{{user.name}}</div>
+
+        <div class="content-block">
+          <p><strong>Email:</strong> {{user.email}}</p>
+          <p><strong>Количество бронирований:</strong> {{user.bookings.length}}</p>
+          <p><strong>Количество отзывов:</strong> {{user.reviews.length}}</p>
+
+          {{#if user.bookings.length}}
+            <div class="short-header">Бронирования</div>
+            <ul class="short-list">
+              {{#each user.bookings}}
+                <li>Бронирование #{{id}} — {{status}}</li>
+              {{/each}}
+            </ul>
+          {{/if}}
+
+          {{#if user.reviews.length}}
+            <div class="short-header">Отзывы</div>
+            <ul class="short-list">
+              {{#each user.reviews}}
+                <li>{{comment}}</li>
+              {{/each}}
+            </ul>
+          {{/if}}
+
+          <form action="/users/{{user.id}}/delete" method="POST" class="service-delete-form">
+            <button type="submit" class="btn-delete">Удалить пользователя</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

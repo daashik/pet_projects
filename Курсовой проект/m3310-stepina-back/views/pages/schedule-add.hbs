@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Добавить запись в расписание — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="schedule-add">
+        <div class="section-header">Добавить запись в расписание</div>
+
+        <form action="/schedule" method="post" class="content-block">
+          <label>
+            Название занятия:
+            <input
+              type="text"
+              name="title"
+              required
+              placeholder="Например: Конные прогулки"
+            />
+          </label>
+
+          <label>
+            Начало:
+            <input
+              type="datetime-local"
+              name="startAt"
+              required
+            />
+          </label>
+
+          <label>
+            Конец:
+            <input
+              type="datetime-local"
+              name="endAt"
+              required
+            />
+          </label>
+
+          <button type="submit">Создать</button>
+        </form>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

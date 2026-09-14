@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{horse.name}} — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="horse-details">
+        <div class="section-header">{{horse.name}}</div>
+
+        <div class="content-block">
+          {{#if horse.photoUrl}}
+            <figure>
+              <img src="{{horse.photoUrl}}" alt="{{horse.name}}" style="max-width: 400px; border-radius: 12px;" />
+            </figure>
+          {{/if}}
+
+          <p><strong>Кличка:</strong> {{horse.name}}</p>
+          <p><strong>Пол:</strong> {{horse.gender}}</p>
+          <p><strong>Порода:</strong> {{horse.breed}}</p>
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Блог — Dust & Glory</title>
+    {{> head}}
+    <link rel="stylesheet" href="/styles/blog.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="blog">
+        <div class="section-header">Достижения клуба</div>
+
+        <div id="achievements-loader" class="loader hidden">
+          <div class="spinner"></div>
+          <p>Загружаем победы из облака...</p>
+        </div>
+
+        <div id="achievements-error" class="error-message hidden">
+          <p>Не удалось загрузить достижения. Проверьте подключение.</p>
+        </div>
+
+        <div id="achievements-list" class="achievements-list"></div>
+
+        <template id="achievement-card-template">
+          <div class="achievement-card">
+            <h3 class="achievement-title"></h3>
+            <p class="achievement-description"></p>
+            <small class="achievement-date"></small>
+          </div>
+        </template>
+
+        <div class="section-header">Онлайн-уведомления</div>
+        <div id="reviews-sse-box" class="review-card sse-card">
+          <p id="reviews-sse-status">Ожидание обновлений...</p>
+        </div>
+
+        <div class="section-header">Отзывы клиентов</div>
+
+        <form action="/reviews" method="post" id="review-form">
+          <label>
+            ФИО:
+            <input
+              type="text"
+              name="fullName"
+              required
+              minlength="2"
+              placeholder="Иванов Иван"
+            />
+          </label>
+
+          <label>
+            Email (не публикуется):
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="ivan@example.com"
+            />
+          </label>
+
+          <label>
+            Ваша обратная связь:
+            <textarea
+              name="comment"
+              required
+              minlength="10"
+              placeholder="Расскажите, что вам понравилось..."
+            ></textarea>
+          </label>
+
+          <button type="submit">Добавить</button>
+        </form>
+
+        <div id="reviews-list">
+          {{#if reviews.length}}
+            {{#each reviews}}
+              <div class="review-card">
+                <h3 class="review-name">{{fullName}}</h3>
+                <p class="review-comment">{{comment}}</p>
+
+                <form action="/reviews/{{id}}/delete" method="POST">
+                  <button class="btn-delete">Удалить</button>
+                </form>
+              </div>
+            {{/each}}
+          {{else}}
+            <p>Пока нет отзывов.</p>
+          {{/if}}
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+
+    <script src="/js/achievements.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="/js/reviews-sse.js" defer></script>
+
+    {{> scripts}}
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Бронирование #{{booking.id}} — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="booking-details">
+        <div class="section-header">Бронирование #{{booking.id}}</div>
+
+        <div class="content-block">
+          <p><strong>Пользователь:</strong> {{booking.user.name}}</p>
+          <p><strong>Услуга:</strong> {{booking.service.title}}</p>
+          <p><strong>Лошадь:</strong> {{#if booking.horse}}{{booking.horse.name}}{{else}}—{{/if}}</p>
+          <p><strong>Слот:</strong> {{#if booking.slot}}{{booking.slot.title}}{{else}}—{{/if}}</p>
+          <p><strong>Дата:</strong> {{booking.date}}</p>
+          <p><strong>Статус:</strong> {{booking.status}}</p>
+
+          <div class="review-actions">
+            <a href="/bookings/{{booking.id}}/edit" class="session-btn">Редактировать</a>
+
+            <form action="/bookings/{{booking.id}}/delete" method="POST">
+              <button type="submit" class="btn-delete">Удалить</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Бронирования — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="bookings">
+        <div class="section-header">Бронирования</div>
+
+        <div class="services-actions">
+          <a href="/bookings/add" class="session-btn primary">Добавить бронирование</a>
+        </div>
+
+        <div class="services-content">
+          {{#each bookings}}
+            <div class="service-item">
+              <h3>
+                <a href="/bookings/{{id}}" class="service-link">
+                  Бронирование #{{id}}
+                </a>
+              </h3>
+
+              <p><strong>Пользователь:</strong> {{user.name}}</p>
+              <p><strong>Услуга:</strong> {{service.title}}</p>
+              <p><strong>Лошадь:</strong> {{#if horse}}{{horse.name}}{{else}}—{{/if}}</p>
+              <p><strong>Статус:</strong> {{status}}</p>
+
+              <div class="service-actions">
+                <a href="/bookings/{{id}}/edit" class="session-btn">Редактировать</a>
+
+                <form action="/bookings/{{id}}/delete" method="POST">
+                  <button type="submit" class="btn-delete">Удалить</button>
+                </form>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

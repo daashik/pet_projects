@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Dust & Glory — конный клуб</title>
+  <meta name="description" content="Dust & Glory — современный конный клуб под Санкт-Петербургом: занятия для начинающих и опытных всадников, выездка, конкур, прогулки по лесным тропам.">
+  <meta name="keywords" content="конный клуб, верховая езда, выездка, конкур, прогулки, лошади, Dust & Glory">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    Подключаем Tabulator - табличный компонент из списка Awesome JavaScript.
+    Эта библиотека используется для интерактивного расписания:
+    - рендерит данные в виде таблицы в блоке #schedule-table
+    - даёт сортировку по столбцам, фильтры в шапке
+    - стили базовой таблицы переопределяем в styles.css
+  -->
+  <link href="https://unpkg.com/tabulator-tables@6.2.4/dist/css/tabulator.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/tabulator-tables@6.2.4/dist/js/tabulator.min.js"></script>
+
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>Dust & Glory</h1>
+
+    <nav>
+      <ul>
+        <li><a href="index.html#about">О клубе</a></li>
+        <li><a href="services.html">Услуги</a></li>
+        <li><a href="prices.html">Цены</a></li>
+        <li><a href="horses.html">Лошади</a></li>
+        <li><a href="blog.html">Блог</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <figure>
+      <img src="../img/image.jpg" alt="Клуб Dust & Glory" width="800">
+      <figcaption>Ваше конное путешествие: от первых шагов в седле до уверенного ритма шага и рыси.</figcaption>
+    </figure>
+
+    <a href="index.html#contacts" class="sticky-booking-btn">Записаться на занятие</a>
+  </header>
+
+  <main>
+    <div class="section-header">О клубе</div>
+    <div class="about-content">
+      Dust & Glory — современный конный клуб вблизи Санкт-Петербурга. 
+      Проводим занятия для новичков и продолжающих, готовим к стартам по выездке и конкуру, 
+      организуем прогулки по живописным лесным тропам.
+    </div>
+
+    <div class="info-text">
+      <h2>Цитата дня</h2>
+      <p>«Лошадь — это поэзия в движении!»</p>
+    </div>
+
+    <div class="short-info">
+      <div class="short-header">Коротко о нас</div>
+      <ul class="short-list">
+        <li>Ежедневно с 12:00 до 21:00 (по предварительной записи)</li>
+        <li>Крытые и открытые манежи</li>
+        <li>Индивидуальные и групповые занятия</li>
+      </ul>
+    </div>
+
+    <!--
+      Расписание: Tabulator рендерит интерактивную таблицу прямо в этот div (#schedule-table).
+      Структура таблицы и данные настраиваются в ES-модуле js/schedule.js.
+    -->
+    <section id="schedule">
+      <h2 class="section-header">Расписание</h2>
+      <div id="schedule-table"></div>
+    </section>
+  </main>
+
+  <footer id="contacts">
+    <h2>Контакты</h2>
+    <address>
+      Санкт-Петербург, посёлок Токсово<br>
+      Тел.: <a href="tel:+79219999999">+7 (921) 999-99-99</a><br>
+      E-mail: <a href="mailto:admin@dandg.ru">admin@dandg.ru</a>
+    </address>
+    <p>&copy; 2025 Конный клуб «Dust & Glory». Все права защищены.</p>
+    <p id="load-time"></p>
+  </footer>
+
+  <script type="module" src="../js/main.js"></script>
+
+  <!--
+    schedule.js - ES-модуль, который конфигурирует стороннюю библиотеку Tabulator:
+    - инициализирует Tabulator для контейнера #schedule-table
+    - передаёт массив с данными занятий (день, время, тип, тренер)
+    - настраивает колонки, фильтры в шапке, layout и адаптивное поведение таблицы
+  -->
+  <script type="module" src="../js/schedule.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Добавить лошадь — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="horse-add">
+        <div class="section-header">Добавить лошадь</div>
+
+        <form action="/horses" method="post" class="content-block">
+          <label>
+            Кличка:
+            <input
+              type="text"
+              name="name"
+              required
+              minlength="2"
+              placeholder="Например: Звезда"
+            />
+          </label>
+
+          <label>
+            Пол:
+            <input
+              type="text"
+              name="gender"
+              placeholder="Например: кобыла"
+            />
+          </label>
+
+          <label>
+            Порода:
+            <input
+              type="text"
+              name="breed"
+              placeholder="Например: арабская"
+            />
+          </label>
+
+          <label>
+            Ссылка на фото:
+            <input
+              type="text"
+              name="photoUrl"
+              placeholder="/img/horse.jpg"
+            />
+          </label>
+
+          <button type="submit">Создать</button>
+        </form>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

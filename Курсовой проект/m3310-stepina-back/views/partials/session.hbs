@@ -1,0 +1,26 @@
+<div class="session-block">
+  {{#if isAuth}}
+    <span class="session-user">
+      Вы вошли как <strong>{{user.name}}</strong>
+    </span>
+    <button class="session-btn" id="signout-btn">Выйти</button>
+  {{else}}
+    <a href="/login" class="session-btn primary">Войти</a>
+    <a href="/register" class="session-btn">Регистрация</a>
+  {{/if}}
+</div>
+
+<script>
+  const btn = document.getElementById('signout-btn');
+  if (btn) {
+    btn.addEventListener('click', async function() {
+      try {
+        await fetch('/auth/signout', {
+          method: 'POST',
+          credentials: 'include',
+        });
+      } catch (e) {}
+      window.location.href = '/';
+    });
+  }
+</script>

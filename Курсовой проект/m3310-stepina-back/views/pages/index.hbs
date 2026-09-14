@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Dust & Glory — конный клуб</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <div class="section-header" id="about">О клубе</div>
+      <div class="about-content">
+        Dust & Glory — современный конный клуб вблизи Санкт-Петербурга.
+        Проводим занятия для новичков и продолжающих, готовим к стартам по выездке и конкуру,
+        организуем прогулки по живописным лесным тропам.
+      </div>
+
+      <div class="info-text">
+        <h2>Цитата дня</h2>
+        <p>«Лошадь — это поэзия в движении!»</p>
+      </div>
+
+      <div class="short-info">
+        <div class="short-header">Коротко о нас</div>
+        <ul class="short-list">
+          <li>Ежедневно с 12:00 до 21:00 (по предварительной записи)</li>
+          <li>Крытые и открытые манежи</li>
+          <li>Индивидуальные и групповые занятия</li>
+        </ul>
+      </div>
+
+      <section id="schedule">
+        <h2 class="section-header">Расписание</h2>
+
+        <div class='service-actions'>
+          <a href="/schedule/add" class="session-btn primary">Добавить запись</a>
+        </div>
+
+        <div id="schedule-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Название</th>
+                <th>Начало</th>
+                <th>Конец</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each slots}}
+                <tr>
+                  <td>{{this.title}}</td>
+                  <td>{{this.startAt}}</td>
+                  <td>{{this.endAt}}</td>
+                  <td>
+                    <a href="/schedule/{{this.id}}">Детали</a>
+                  </td>
+                </tr>
+              {{/each}}
+              {{#unless slots}}
+                <tr>
+                  <td colspan="4">Расписание пока пусто</td>
+                </tr>
+              {{/unless}}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="services-actions">
+          <a href="/users{{authQuery}}" class="session-btn primary">Профили пользователей</a>
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>

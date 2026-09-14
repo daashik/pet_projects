@@ -1,0 +1,282 @@
+#review-form {
+  background: var(--bg);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 165, 116, 0.5);
+  margin-bottom: 32px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#review-form label {
+  display: block;
+  margin: 16px 0 8px;
+  font-weight: bold;
+  color: var(--title-font);
+  font-size: 1.05rem;
+}
+
+#review-form input,
+#review-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(212, 165, 116, 0.6);
+  border-radius: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--serious_text);
+  background: var(--bg);
+  box-sizing: border-box;
+}
+
+#review-form input:focus,
+#review-form textarea:focus {
+  outline: none;
+  border-color: var(--title-font);
+  box-shadow: 0 0 0 2px rgba(44, 90, 56, 0.2);
+}
+
+#review-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#review-form button {
+  display: block;
+  width: fit-content;
+  margin-top: 16px;
+  padding: 10px 24px;
+  background-color: var(--title-font);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.review-card {
+  background: var(--bg);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 165, 116, 0.5);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#reviews-sse-box {
+  margin-bottom: 24px;
+}
+
+.review-card h3 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--title-font);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.review-card p {
+  margin: 6px 0;
+  color: var(--serious_text);
+  line-height: 1.5;
+}
+
+.review-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 6px 14px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: rgb(202, 152, 99);
+  color: var(--serious_text);
+  border-color: rgba(212, 166, 116, 0.9);
+}
+
+.btn-delete {
+  background-color: #d9534f;
+  color: white;
+  border-color: #d43f3a;
+}
+
+@media (max-width: 768px) {
+  #review-form {
+    padding: 18px;
+  }
+
+  .review-card {
+    padding: 16px;
+  }
+
+  .review-card h3 {
+    font-size: 1.25rem;
+  }
+
+  #review-form button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .review-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin: 24px 0 32px;
+}
+
+.achievement-card {
+  background: var(--bg);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 69, 19, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.achievement-card:hover {
+  border-color: rgba(139, 69, 19, 0.6);
+}
+
+.achievement-card h3 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #5a3921;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+.achievement-card p {
+  margin: 0 0 12px;
+  color: var(--serious_text);
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.achievement-card small {
+  display: block;
+  color: #8b5a2b;
+  font-style: italic;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.loader,
+.error-message {
+  text-align: center;
+  padding: 28px;
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(139, 69, 19, 0.2);
+  border-top: 4px solid var(--title-font);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  background: #fff8f8;
+  border: 1px solid #f5c6cb;
+  border-radius: 12px;
+  color: #721c24;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .achievements-list {
+    gap: 18px;
+    margin: 20px 0 28px;
+  }
+
+  .achievement-card {
+    padding: 16px;
+  }
+
+  .achievement-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .achievement-card p {
+    font-size: 0.95rem;
+  }
+
+  .achievement-card small {
+    font-size: 0.9rem;
+  }
+
+  .loader,
+  .error-message {
+    padding: 20px 16px;
+    font-size: 1rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+
+.toast-success {
+  background-color: #2f6b3f !important;
+  color: white !important;
+  border-radius: 12px !important;
+}
+
+.toast-success .toast-message {
+  background: transparent !important;
+  color: white !important;
+  font-weight: 500;
+}
+
+.toast {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+}

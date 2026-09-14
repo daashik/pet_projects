@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Добавить услугу — Dust & Glory</title>
+    {{> head}}
+  </head>
+
+  <body>
+    {{> header}}
+    {{> session}}
+
+    <main>
+      <section id="service-add">
+        <div class="section-header">Добавить услугу</div>
+
+        <form action="/services" method="post" class="content-block">
+          
+          <label>
+            Название:
+            <input 
+              type="text" 
+              name="title" 
+              required 
+              minlength="2"
+              placeholder="Например: Конные прогулки"
+            />
+          </label>
+
+          <label>
+            Описание:
+            <textarea 
+              name="description" 
+              placeholder="Описание услуги..."
+            ></textarea>
+          </label>
+
+          <label>
+            Цена (₽):
+            <input 
+              type="number" 
+              name="priceRub" 
+              min="0" 
+              step="1"
+              placeholder="3200"
+            />
+          </label>
+
+          <button type="submit">Создать</button>
+
+        </form>
+      </section>
+    </main>
+
+    {{> footer}}
+    {{> scripts}}
+  </body>
+</html>
